@@ -106,6 +106,16 @@ func NewDatabaseService() *DatabaseService {
 			FOREIGN KEY (ship_id) REFERENCES ships(id)
 		);
 
+		CREATE TABLE IF NOT EXISTS suppliers (
+			supplier_id INTEGER PRIMARY KEY AUTOINCREMENT,
+			name TEXT NOT NULL,
+			contact_person TEXT,
+			phone TEXT,
+			email TEXT,
+			address TEXT,
+			added_date TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
+		);
+
 		CREATE TABLE IF NOT EXISTS inventory_items (
 			item_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			name TEXT NOT NULL,

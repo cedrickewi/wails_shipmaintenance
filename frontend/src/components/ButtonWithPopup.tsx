@@ -20,7 +20,10 @@ export default function ButtonWithPopup({ buttonLabel, dialogTitle, children }: 
 
   return (
     <>
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button variant="contained" onClick={(event)=>{
+        event.stopPropagation()
+        handleClickOpen()
+      }}>
         {buttonLabel}
       </Button>
 

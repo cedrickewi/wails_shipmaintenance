@@ -8,6 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { db } from '../../wailsjs/go/models';
+import ButtonWithPopup from './ButtonWithPopup';
+import WorkOrderForm from './WorkOrderForm';
 
 
 interface IssuesTableProps {
@@ -34,6 +36,7 @@ const IssuesTable = ({ issues }: IssuesTableProps) => {
                             <TableCell>Issue Description</TableCell>
                             <TableCell>Mechanic</TableCell>
                             <TableCell>Status</TableCell>
+                            <TableCell>Add OTP</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -46,9 +49,14 @@ const IssuesTable = ({ issues }: IssuesTableProps) => {
                             >
                                 <TableCell>{issue.issue_id}</TableCell>
                                 <TableCell>{issue.ship_name}</TableCell>
-                                <TableCell>{issue.issue_description}</TableCell>
+                                <TableCell sx={{ maxWidth: "200px" }}>{issue.issue_description}</TableCell>
                                 <TableCell>{issue.mechanic_name}</TableCell>
                                 <TableCell>{issue.completion_date ? 'Completed' : 'Pending'}</TableCell>
+                                <TableCell onClick={(event) => {
+                                    event.stopPropagation()
+                                }}><ButtonWithPopup buttonLabel='ADD WORK ORDER' dialogTitle='WORK ORDER FORM'>
+                                        <WorkOrderForm issue={issue} key={issue.issue_id}/>
+                                    </ButtonWithPopup></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
