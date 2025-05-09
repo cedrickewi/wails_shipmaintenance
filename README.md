@@ -2,10 +2,11 @@
 
 ## About
 
-This is the official Wails React template.
+This application is built using Wails, combining Go and React to create a desktop application. 
 
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
+The project structure follows the standard Wails architecture, with frontend components in React and backend services in Go. You can customize the application settings through `wails.json` configuration file.
+
+For detailed configuration options and documentation, visit: https://wails.io/docs/reference/project-config
 
 ## Live Development
 
