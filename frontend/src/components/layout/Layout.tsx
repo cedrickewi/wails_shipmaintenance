@@ -10,7 +10,7 @@ import { ToastContainer } from 'react-toastify';
 
 
 export default function Layout() {
-  const drawerWidth = 200;
+  const drawerWidth = 210;
 
   return (
     <Box sx={{ display: "flex", overflow: "hidden" }} >
@@ -39,19 +39,23 @@ export default function Layout() {
           </ListItem>
           <ListItem component={Link} to="/ships">
             <ListItemIcon><DirectionsBoatIcon /></ListItemIcon>
-            <ListItemText primary="ships" />
+            <ListItemText primary="Ships" />
           </ListItem>
           <ListItem component={Link} to="/mechanics">
             <ListItemIcon><EngineeringIcon /></ListItemIcon>
-            <ListItemText primary="mechanics" />
+            <ListItemText primary="Mechanics" />
           </ListItem>
           <ListItem component={Link} to="/issues">
             <ListItemIcon><HandymanIcon /></ListItemIcon>
-            <ListItemText primary="issues" />
+            <ListItemText primary="Declare Issues" />
+          </ListItem>
+          <ListItem component={Link} to="/workorders">
+            <ListItemIcon><HandymanIcon /></ListItemIcon>
+            <ListItemText primary="Work Order" />
           </ListItem>
           <ListItem component={Link} to="/magazine">
             <ListItemIcon><InventoryIcon /></ListItemIcon>
-            <ListItemText primary="magazine" />
+            <ListItemText primary="Magazine" />
           </ListItem>
         </List>
       </Drawer>

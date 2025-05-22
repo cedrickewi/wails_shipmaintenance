@@ -24,6 +24,32 @@ export namespace db {
 	        this.updated_date = source["updated_date"];
 	    }
 	}
+	export class InventoryItem {
+	    item_id: number;
+	    name: string;
+	    type: string;
+	    unit: string;
+	    quantity_available: number;
+	    min_stock_level: number;
+	    location: string;
+	    last_restocked: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new InventoryItem(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.item_id = source["item_id"];
+	        this.name = source["name"];
+	        this.type = source["type"];
+	        this.unit = source["unit"];
+	        this.quantity_available = source["quantity_available"];
+	        this.min_stock_level = source["min_stock_level"];
+	        this.location = source["location"];
+	        this.last_restocked = source["last_restocked"];
+	    }
+	}
 	export class LogIssue {
 	    log_id: number;
 	    issue_id: number;

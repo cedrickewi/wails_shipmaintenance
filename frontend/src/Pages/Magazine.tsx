@@ -1,6 +1,19 @@
 import AddInventoryItem from '@/components/AddInventoryItem';
 import ButtonWithPopup from '@/components/ButtonWithPopup';
+import MaintenanceReportPDF from '@/components/pdfstyles/DeclarationPan';
+import { PDFViewer, Font } from '@react-pdf/renderer';
 import React, { useState } from 'react';
+
+
+// Register a font (use a built-in font or a custom one)
+Font.register({
+    family: 'Helvetica', // Use built-in Helvetica font
+    fonts: [
+        {
+            src: 'https://fonts.gstatic.com/s/helvetica/v1/helvetica.woff2', // Optional: Link to a custom font
+        },
+    ],
+});
 
 interface Supplier {
     id: number;
@@ -79,16 +92,17 @@ const Magazine: React.FC = () => {
     ];
 
     return (
-        <div className="container mx-auto p-4">
+        <>
+            {false ? <div className="container mx-auto p-4">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">Magazine Inventory</h1>
                 <ButtonWithPopup buttonLabel='ADD MAGAZINE ITEM' dialogTitle='MAGAZINE ITEM FORM'> 
                     <AddInventoryItem />
-                </ButtonWithPopup>
+                </ButtonWithPopup>  
             </div>
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white">
-                    <thead>
+                    <thead>  
                         <tr className="bg-gray-100">
                             <th className="px-6 py-3 text-left">Name</th>
                             <th className="px-6 py-3 text-left">Category</th>
@@ -121,7 +135,11 @@ const Magazine: React.FC = () => {
                     onClose={() => setSelectedItem(null)}
                 />
             )}
-        </div>
+        </div>: <PDFViewer style={{ width: '100%', height: '100vh' }}>
+            <MaintenanceReportPDF/>
+            </PDFViewer>}
+        </>
+        
     );
 };
 

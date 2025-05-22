@@ -233,6 +233,8 @@ type WorkOrderItem struct {
 	Notes        string  `json:"notes"`
 }
 
+
+
 func (d *DatabaseService) GetShipIssues() ([]ShipIssue, error) {
 	rows, err := d.db.Query("SELECT issue_id, ship_id, reporter_id, issue_type, title, description, severity, status, system_affected, started_date, reported_date, updated_date FROM ship_issues")
 	if err != nil {
@@ -446,4 +448,38 @@ func (d *DatabaseService) AddWorkOrderItems(orderID int, items []WorkOrderItem) 
 	}
 
 	return tx.Commit()
+}
+
+func (d *DatabaseService) AddInventoryItem(item InventoryItem) error {
+	_, err := d.db.Exec(`
+		INSERT INTO inventory_items 
+		(name, type, unit, quantity_available, min_stock_level, location) 
+		VALUES (?, ?, ?, ?, ?, ?)`,
+		item.Name, item.Type, item.Unit, item.QuantityAvailable, item.MinStockLevel, item.Location)
+	return err
+}
+
+
+func (d *DatabaseService) UpdateInventoryItem(item InventoryItem) error {
+	// First get the current quantity
+	var currentQty float64
+	err := d.db.QueryRow("SELECT quantity_available FROM inventory_items WHERE item_id = ?", item.ItemID).Scan(&currentQty)
+	if err != nil {
+		return err
+	}
+
+	// Update with the sum of current and new quantity
+	_, err = d.db.Exec(`
+		UPDATE inventory_items 
+		SET name = ?, 
+			type = ?, 
+			unit = ?, 
+			quantity_available = ?, 
+			min_stock_level = ?, 
+			location = ?,
+			last_restocked = datetime('now', 'localtime')
+		WHERE item_id = ?`,
+		item.Name, item.Type, item.Unit, currentQty + item.QuantityAvailable, 
+		item.MinStockLevel, item.Location, item.ItemID)
+	return err
 }

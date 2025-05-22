@@ -44,33 +44,42 @@ type ShipIssue struct {
 	UpdatedDate      string `json:"updated_date"`
 }
 
-
 type LogIssue struct {
-	LogID              int64  `json:"log_id"`
-	IssueID            int64  `json:"issue_id"`
-	ControllerID	   int64  `json:"controller_id"` // ID of the controller who logged the issue
-	ActionTaken		string `json:"action_taken"` // Description of the action taken
-	PartsReplaced	string `json:"parts_replaced"` // Description of parts replaced
-	ShipID           int64  `json:"ship_id"`
-	ReporterID       int64  `json:"reporter_id"`
-	MechanicID	   int64  `json:"mechanic_id"`
-	HoursSpent	   int64  `json:"hours_spent"` // Number of hours spent on the issue
-	CompletionDate	   string `json:"completion_date"` // Date when the issue was completed
+	LogID          int64  `json:"log_id"`
+	IssueID        int64  `json:"issue_id"`
+	ControllerID   int64  `json:"controller_id"`  // ID of the controller who logged the issue
+	ActionTaken    string `json:"action_taken"`   // Description of the action taken
+	PartsReplaced  string `json:"parts_replaced"` // Description of parts replaced
+	ShipID         int64  `json:"ship_id"`
+	ReporterID     int64  `json:"reporter_id"`
+	MechanicID     int64  `json:"mechanic_id"`
+	HoursSpent     int64  `json:"hours_spent"`     // Number of hours spent on the issue
+	CompletionDate string `json:"completion_date"` // Date when the issue was completed
 }
 
-
 type LogIssueReport struct {
-	LogID             int64  `json:"log_id"`
-	IssueID           int64  `json:"issue_id"`
-	IssueDescription  string `json:"issue_description"`
-	ShipID            int64  `json:"ship_id"`
-	ShipName          string `json:"ship_name"`
-	MechanicID        int64  `json:"mechanic_id"`
-	MechanicName      string `json:"mechanic_name"`
-	ControllerID      int64  `json:"controller_id"`
-	ControllerName    string `json:"controller_name"`
-	ActionTaken       string `json:"action_taken"`
-	PartsReplaced     string `json:"parts_replaced"`
-	HoursSpent        int64  `json:"hours_spent"`
-	CompletionDate    string `json:"completion_date"`
+	LogID            int64  `json:"log_id"`
+	IssueID          int64  `json:"issue_id"`
+	IssueDescription string `json:"issue_description"`
+	ShipID           int64  `json:"ship_id"`
+	ShipName         string `json:"ship_name"`
+	MechanicID       int64  `json:"mechanic_id"`
+	MechanicName     string `json:"mechanic_name"`
+	ControllerID     int64  `json:"controller_id"`
+	ControllerName   string `json:"controller_name"`
+	ActionTaken      string `json:"action_taken"`
+	PartsReplaced    string `json:"parts_replaced"`
+	HoursSpent       int64  `json:"hours_spent"`
+	CompletionDate   string `json:"completion_date"`
+}
+
+type InventoryItem struct {
+	ItemID            int     `json:"item_id"`
+	Name              string  `json:"name"`
+	Type              string  `json:"type"`
+	Unit              string  `json:"unit"`
+	QuantityAvailable float64 `json:"quantity_available"`
+	MinStockLevel     float64 `json:"min_stock_level"`
+	Location          string  `json:"location"`
+	LastRestocked     string  `json:"last_restocked"`
 }

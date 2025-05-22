@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
+import PrintIcon from '@mui/icons-material/Print';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import { db } from '../../wailsjs/go/models';
 import ButtonWithPopup from './ButtonWithPopup';
 import WorkOrderForm from './WorkOrderForm';
+import { useNavigate } from 'react-router-dom';
 
 
 interface IssuesTableProps {
@@ -19,6 +21,8 @@ interface IssuesTableProps {
 const IssuesTable = ({ issues }: IssuesTableProps) => {
     const [selectedIssue, setSelectedIssue] = useState<db.LogIssueReport | null>(null);
     const [open, setOpen] = useState(false);
+
+    const navigate = useNavigate()
 
     const handleRowClick = (issue: db.LogIssueReport) => {
         setSelectedIssue(issue);
@@ -37,6 +41,7 @@ const IssuesTable = ({ issues }: IssuesTableProps) => {
                             <TableCell>Mechanic</TableCell>
                             <TableCell>Status</TableCell>
                             <TableCell>Add OTP</TableCell>
+                            <TableCell>Print <PrintIcon /></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -54,9 +59,21 @@ const IssuesTable = ({ issues }: IssuesTableProps) => {
                                 <TableCell>{issue.completion_date ? 'Completed' : 'Pending'}</TableCell>
                                 <TableCell onClick={(event) => {
                                     event.stopPropagation()
-                                }}><ButtonWithPopup buttonLabel='ADD WORK ORDER' dialogTitle='WORK ORDER FORM'>
-                                        <WorkOrderForm issue={issue} key={issue.issue_id}/>
-                                    </ButtonWithPopup></TableCell>
+                                }}>
+                                    <ButtonWithPopup buttonLabel='ADD WORK ORDER' dialogTitle='WORK ORDER FORM'>
+                                        <WorkOrderForm issue={issue} key={issue.issue_id} />
+                                    </ButtonWithPopup>
+                                </TableCell>
+                                <TableCell>
+                                    <IconButton onClick={(event) => {
+                                        event.stopPropagation();
+                                        // Handle print action here
+                                        navigate(`/issues/${issue.issue_id}`);
+                                        console.log(`Print issue ${issue.issue_id}`);
+                                    }}>
+                                        <PrintIcon />
+                                    </IconButton>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
