@@ -9,8 +9,6 @@ import WorkOrder from './Pages/WorkOrder';
 import PrintDeclarationPan from './Pages/PrintPages/PrintDeclarationPan';
 
 function App() {
-
-
   return (
     <BrowserRouter>
       <Routes>
@@ -20,11 +18,10 @@ function App() {
           <Route path="mechanics" element={<Mechanics />} />
           <Route path="issues" element={<Issues />} />
           <Route path="issues/:id" element={<PrintDeclarationPan />} />
-          <Route path='magazine' element={<Magazine />} />  
-          <Route path='workorders' element={<WorkOrder />} />  
+          <Route path='magazine' element={<Magazine />} />
+          <Route path='workorders' element={<WorkOrder />} />
         </Route>
       </Routes>
-
     </BrowserRouter>
   )
 }

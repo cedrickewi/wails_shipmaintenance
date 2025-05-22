@@ -18,6 +18,8 @@ export function AssignMechanicToShip(arg1:number,arg2:number):Promise<void>;
 
 export function GetAllShipsLogReports():Promise<Array<db.LogIssueReport>>;
 
+export function GetLogIssueReportByID(arg1:number):Promise<db.LogIssueReport>;
+
 export function GetLogsIssues():Promise<Array<db.LogIssue>>;
 
 export function GetMechanics():Promise<Array<db.ChiefMechanic>>;

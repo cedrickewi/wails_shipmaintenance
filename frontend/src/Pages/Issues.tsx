@@ -10,7 +10,6 @@ export const Issues = () => {
     const [shipIssues, setShipIssues] = useState<db.LogIssueReport[]>([])
     const getForSingleShip = async () => {
         const response = await GetAllShipsLogReports()
-        console.log(response)
         setShipIssues(response)
     }
 
@@ -22,4 +21,4 @@ export const Issues = () => {
         <h1>Issues</h1>
         <IssuesTable issues={shipIssues} />
     </Box>)
-}
+}  

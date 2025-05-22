@@ -423,6 +423,54 @@ func (d *DatabaseService) GetAllShipsLogReports() ([]LogIssueReport, error) {
 	return reports, nil
 }
 
+func (d *DatabaseService) GetLogIssueReportByID(logID int) (*LogIssueReport, error) {
+	query := `
+	SELECT 
+		li.log_id,
+		li.issue_id,
+		si.description AS issue_description,
+		s.id AS ship_id,
+		s.name AS ship_name,
+		li.mechanic_id,
+		mech.name AS mechanic_name,
+		li.controller_id,
+		ctrl.name AS controller_name,
+		li.action_taken,
+		li.parts_replaced,
+		li.hours_spent,
+		li.completion_date
+	FROM logs_issues li
+	LEFT JOIN ships s ON li.ship_id = s.id
+	LEFT JOIN chief_mechanics mech ON li.mechanic_id = mech.mechanic_id
+	LEFT JOIN chief_mechanics ctrl ON li.controller_id = ctrl.mechanic_id
+	LEFT JOIN ship_issues si ON li.issue_id = si.issue_id
+	WHERE li.log_id = ?`
+
+	var report LogIssueReport
+	err := d.db.QueryRow(query, logID).Scan(
+		&report.LogID,
+		&report.IssueID,
+		&report.IssueDescription,
+		&report.ShipID,
+		&report.ShipName,
+		&report.MechanicID,
+		&report.MechanicName,
+		&report.ControllerID,
+		&report.ControllerName,
+		&report.ActionTaken,
+		&report.PartsReplaced,
+		&report.HoursSpent,
+		&report.CompletionDate,
+	)
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	return &report, nil
+}
+
 func (d *DatabaseService) AddWorkOrderItems(orderID int, items []WorkOrderItem) error {
 	tx, err := d.db.Begin()
 	if err != nil {

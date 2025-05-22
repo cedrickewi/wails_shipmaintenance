@@ -1,6 +1,7 @@
 import { Document, Page, Text, View, StyleSheet, Font, Image } from '@react-pdf/renderer';
 // import {Table, TR, TH, TD, } from '@ag-media/react-pdf-table';
 import logo from "../../assets/images/logo.png"
+import { db } from '../../../wailsjs/go/models';
 
 
 // Register font (ensure the path is correct)
@@ -53,11 +54,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const MaintenanceReportPDF = () => (
+type DeclarationProps = {
+  issue: db.LogIssueReport
+}
+
+const MaintenanceReportPDF = ({ issue }: DeclarationProps) => (
   <Document>
     <Page size="A4" style={styles.page}>
       {/* PAD HEADER */}
-      <View style={{ display: "flex", flexDirection: "row", width: "100%", height: "90px", border: "2px solid black", marginBottom: "2px", fontWeight:"bold" }}>
+      <View style={{ display: "flex", flexDirection: "row", width: "100%", height: "90px", border: "2px solid black", marginBottom: "2px", fontWeight: "bold" }}>
         <View style={{ display: "flex", flex: 1, padding: "8px" }}>
           <Image src={logo} style={{ height: "85px" }}></Image>
         </View>
@@ -102,7 +107,7 @@ const MaintenanceReportPDF = () => (
             <Text>Nom de l'engin</Text>
           </View>
           <View style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "28%", borderRight: "1.1px solid black" }}>
-            <Text></Text>
+            <Text>{issue.ship_name}</Text>
           </View>
           <View style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: cellColor, width: "17%", borderRight: "1.1px solid black" }}>
             <Text>type d'engin</Text>
@@ -162,7 +167,7 @@ const MaintenanceReportPDF = () => (
             <Text>Chef Mecanicien</Text>
           </View>
           <View style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "45%", borderRight: "1.1px solid black" }}>
-            <Text></Text>
+            <Text>{issue.mechanic_name}</Text>
           </View>
           <View style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: cellColor, width: "17%", borderRight: "1.1px solid black" }}>
             <Text>Visa</Text>
@@ -343,7 +348,7 @@ const MaintenanceReportPDF = () => (
             <Text>Description</Text>
           </View>
           <View style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "50%", borderRight: "1.1px solid black" }}>
-            <Text></Text>
+            <Text>{issue.issue_description}</Text>
           </View>
         </View>
         <View style={{ width: "100%", height: "20px", display: "flex", justifyContent: "center", alignItems: "center", borderBottom: "1.1px solid black", backgroundColor: cellColor }}>
@@ -373,7 +378,7 @@ const MaintenanceReportPDF = () => (
         <View style={{ width: "100%", height: "20px", display: "flex", justifyContent: "center", alignItems: "center", borderBottom: "1.1px solid black", backgroundColor: cellColor }}>
           <Text style={{ textAlign: "center" }}>Proposer solutions</Text>
         </View>
-        <View style={{ width: "100%", height: "50px", display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <View style={{ width: "100%", height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}>
           <Text style={{ textAlign: "left" }}></Text>
         </View>
       </View>

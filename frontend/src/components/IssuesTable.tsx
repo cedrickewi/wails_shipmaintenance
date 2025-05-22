@@ -68,8 +68,8 @@ const IssuesTable = ({ issues }: IssuesTableProps) => {
                                     <IconButton onClick={(event) => {
                                         event.stopPropagation();
                                         // Handle print action here
-                                        navigate(`/issues/${issue.issue_id}`);
-                                        console.log(`Print issue ${issue.issue_id}`);
+                                        console.log("Print issue ID:", issue.issue_id);
+                                        navigate(`${issue.issue_id}`);   
                                     }}>
                                         <PrintIcon />
                                     </IconButton>

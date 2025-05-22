@@ -1,7 +1,6 @@
 import AddInventoryItem from '@/components/AddInventoryItem';
 import ButtonWithPopup from '@/components/ButtonWithPopup';
-import MaintenanceReportPDF from '@/components/pdfstyles/DeclarationPan';
-import { PDFViewer, Font } from '@react-pdf/renderer';
+import { Font } from '@react-pdf/renderer';
 import React, { useState } from 'react';
 
 
@@ -47,7 +46,7 @@ const ItemModal: React.FC<{ item: MagazineItem | null; onClose: () => void }> = 
                     </button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <img src={item.imageUrl} alt={item.name} className="w-full h-64 object-cover rounded"/>
+                    <img src={item.imageUrl} alt={item.name} className="w-full h-64 object-cover rounded" />
                     <div>
                         <p className="text-gray-600 mb-2">{item.description}</p>
                         <p className="text-green-600 font-bold mb-2">${item.price}</p>
@@ -93,53 +92,51 @@ const Magazine: React.FC = () => {
 
     return (
         <>
-            {false ? <div className="container mx-auto p-4">
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-3xl font-bold">Magazine Inventory</h1>
-                <ButtonWithPopup buttonLabel='ADD MAGAZINE ITEM' dialogTitle='MAGAZINE ITEM FORM'> 
-                    <AddInventoryItem />
-                </ButtonWithPopup>  
-            </div>
-            <div className="overflow-x-auto">
-                <table className="min-w-full bg-white">
-                    <thead>  
-                        <tr className="bg-gray-100">
-                            <th className="px-6 py-3 text-left">Name</th>
-                            <th className="px-6 py-3 text-left">Category</th>
-                            <th className="px-6 py-3 text-left">Price</th>
-                            <th className="px-6 py-3 text-left">Stock Level</th>
-                            <th className="px-6 py-3 text-left">Supplier</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {dummyData.map((item) => (
-                            <tr 
-                                key={item.id} 
-                                className="border-b hover:bg-gray-50 cursor-pointer"
-                                onClick={() => setSelectedItem(item)}
-                            >
-                                <td className="px-6 py-4">{item.name}</td>
-                                <td className="px-6 py-4">{item.category}</td>
-                                <td className="px-6 py-4">${item.price}</td>
-                                <td className="px-6 py-4">{item.stockLevel}</td>
-                                <td className="px-6 py-4">{item.supplier.name}</td>
+            <div className="container mx-auto p-4">
+                <div className="flex justify-between items-center mb-6">
+                    <h1 className="text-3xl font-bold">Magazine Inventory</h1>
+                    <ButtonWithPopup buttonLabel='ADD MAGAZINE ITEM' dialogTitle='MAGAZINE ITEM FORM'>
+                        <AddInventoryItem />
+                    </ButtonWithPopup>
+                </div>
+                <div className="overflow-x-auto">
+                    <table className="min-w-full bg-white">
+                        <thead>
+                            <tr className="bg-gray-100">
+                                <th className="px-6 py-3 text-left">Name</th>
+                                <th className="px-6 py-3 text-left">Category</th>
+                                <th className="px-6 py-3 text-left">Price</th>
+                                <th className="px-6 py-3 text-left">Stock Level</th>
+                                <th className="px-6 py-3 text-left">Supplier</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {dummyData.map((item) => (
+                                <tr
+                                    key={item.id}
+                                    className="border-b hover:bg-gray-50 cursor-pointer"
+                                    onClick={() => setSelectedItem(item)}
+                                >
+                                    <td className="px-6 py-4">{item.name}</td>
+                                    <td className="px-6 py-4">{item.category}</td>
+                                    <td className="px-6 py-4">${item.price}</td>
+                                    <td className="px-6 py-4">{item.stockLevel}</td>
+                                    <td className="px-6 py-4">{item.supplier.name}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                {selectedItem && (
+                    <ItemModal
+                        item={selectedItem}
+                        onClose={() => setSelectedItem(null)}
+                    />
+                )}
             </div>
-            
-            {selectedItem && (
-                <ItemModal 
-                    item={selectedItem} 
-                    onClose={() => setSelectedItem(null)}
-                />
-            )}
-        </div>: <PDFViewer style={{ width: '100%', height: '100vh' }}>
-            <MaintenanceReportPDF/>
-            </PDFViewer>}
         </>
-        
+
     );
 };
 

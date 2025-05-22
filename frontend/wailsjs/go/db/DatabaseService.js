@@ -34,6 +34,10 @@ export function GetAllShipsLogReports() {
   return window['go']['db']['DatabaseService']['GetAllShipsLogReports']();
 }
 
+export function GetLogIssueReportByID(arg1) {
+  return window['go']['db']['DatabaseService']['GetLogIssueReportByID'](arg1);
+}
+
 export function GetLogsIssues() {
   return window['go']['db']['DatabaseService']['GetLogsIssues']();
 }
