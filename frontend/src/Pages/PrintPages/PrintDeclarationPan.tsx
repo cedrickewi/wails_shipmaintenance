@@ -1,5 +1,4 @@
 import MaintenanceReportPDF from "@/components/pdfstyles/DeclarationPan"
-import { GetLogIssueReportByID } from "../../../wailsjs/go/db/DatabaseService"
 import { PDFViewer } from "@react-pdf/renderer"
 import { db } from "wailsjs/go/models";
 import { useState, useEffect } from "react";

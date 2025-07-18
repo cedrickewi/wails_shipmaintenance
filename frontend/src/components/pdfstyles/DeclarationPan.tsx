@@ -209,13 +209,13 @@ const MaintenanceReportPDF = ({ issue }: DeclarationProps) => (
             <Text>Date apparition</Text>
           </View>
           <View style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "30%", borderRight: "1.1px solid black" }}>
-            <Text></Text>
+            <Text>{issue.action_taken}</Text>
           </View>
           <View style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: cellColor, width: "20%", borderRight: "1.1px solid black" }}>
             <Text>Date detection</Text>
           </View>
           <View style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "20%" }}>
-            <Text></Text>
+            <Text>{issue.controller_name}</Text>
           </View>
         </View>
       </View>
@@ -355,7 +355,7 @@ const MaintenanceReportPDF = ({ issue }: DeclarationProps) => (
           <Text style={{ textAlign: "center" }}>Cause Probale</Text>
         </View>
         <View style={{ width: "100%", height: "50px", display: "flex", justifyContent: "center", alignItems: "center", borderBottom: "1.1px solid black" }}>
-          <Text style={{ textAlign: "left" }}></Text>
+          <Text style={{ textAlign: "left" }}>{issue.issue_description}</Text>
         </View>
         <View style={{ width: "100%", height: "20px", display: "flex", justifyContent: "center", alignItems: "center", borderBottom: "1.1px solid black", backgroundColor: cellColor }}>
           <Text style={{ textAlign: "center" }}>Consequences de la Panne</Text>
